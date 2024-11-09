@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: localpass
+      POSTGRES_DB: sap
+      PGDATA: /data/postgres
+    volumes:
+      - postgres_data:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - sap
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d sap"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  sap-app:
+    build: .
+    container_name: sap_spring_app
+    environment:
+      DB_HOST: postgres
+      DB_USER: root
+      DB_PASS: localpass
+      SERVER_PORT: 8080
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:8080/actuator/health | grep -q '\"status\":\"UP\"' && exit 0 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    ports:
+      - "8080:8080"
+    networks:
+      - sap
+    depends_on:
+      postgres:
+        condition: service_healthy
+networks:
+  sap:
+    driver: bridge
+
+volumes:
+  postgres_data:
