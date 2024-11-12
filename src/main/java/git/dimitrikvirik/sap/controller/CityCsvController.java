@@ -48,7 +48,8 @@ public class CityCsvController {
                     description = "Sorting criteria in the format: property,(asc|desc). Multiple sort criteria are supported.",
                     example = "name,asc",
                     schema = @Schema(type = "string", allowableValues = {"name,asc", "name,desc", "population,asc", "population,desc", "area,asc", "area,desc"})
-            ) Sort sort
+            )
+            Sort sort
     ) {
         List<CityCsvDTO> cities = cityService.getAllCities(sort, name).stream().map(CityCsvDTO::fromEntity).toList();
         byte[] csvContent = CsvUtils.write(cities, CityCsvDTO.class);

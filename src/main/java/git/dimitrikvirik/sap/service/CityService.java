@@ -20,9 +20,13 @@ public class CityService {
 
     @Transactional(readOnly = true)
     public List<City> getAllCities(Sort sort, String name) {
+        if (sort == null)
+            sort = Sort.by("name").ascending();
+
         if (name != null) {
             return cityRepository.findByNameContains(name, sort);
         }
+
         return cityRepository.findAll(sort);
     }
 

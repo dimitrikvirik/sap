@@ -2,15 +2,11 @@ package git.dimitrikvirik.sap.utils;
 
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.*;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-import git.dimitrikvirik.sap.model.dto.CityCsvDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.*;
-import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -52,7 +48,7 @@ public class CsvUtils {
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
             return csvToBean.parse();
-        } catch (IOException e) {
+        } catch (RuntimeException | IOException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Failed to read CSV data: " + e.getMessage(), e);
         }
     }

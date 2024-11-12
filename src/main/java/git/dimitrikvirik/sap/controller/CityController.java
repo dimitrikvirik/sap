@@ -57,7 +57,8 @@ public class CityController {
                     description = "Sorting criteria in the format: property,(asc|desc). Multiple sort criteria are supported.",
                     example = "name,asc",
                     schema = @Schema(type = "string", allowableValues = {"name,asc", "name,desc", "population,asc", "population,desc", "area,asc", "area,desc"})
-            ) Sort sort
+            )
+            Sort sort
     ) {
         return ResponseEntity.ok(cityService.getAllCities(sort, name));
     }

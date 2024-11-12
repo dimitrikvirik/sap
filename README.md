@@ -17,3 +17,14 @@ To stop the application, press `Ctrl+C` or run:
 ```bash
 docker-compose down
 ```
+
+## Run the Test
+
+To run the tests using Gradle, follow these steps:
+
+- Open a terminal or command prompt.
+- Navigate to the root directory of your project. 
+- Execute the following command:
+```bash
+./gradlew test
+```

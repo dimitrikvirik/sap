@@ -1,9 +1,13 @@
 package git.dimitrikvirik.sap.model.param;
 
 import com.opencsv.bean.CsvBindByName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CityCsvParam {
 
     @CsvBindByName(column = "name")
