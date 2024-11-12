@@ -1,13 +1,9 @@
 package git.dimitrikvirik.sap.model.dto;
 
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvBindByNames;
 import com.opencsv.bean.CsvBindByPosition;
-import com.opencsv.bean.CsvCustomBindByName;
 import git.dimitrikvirik.sap.model.entity.City;
 import lombok.Data;
-import org.apache.commons.beanutils.converters.LongConverter;
-import org.apache.commons.beanutils.converters.StringConverter;
 
 @Data
 public class CityCsvDTO {
