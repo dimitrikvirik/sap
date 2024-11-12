@@ -40,7 +40,7 @@ public class CsvUtils {
     }
 
 
-    public static <T> List<T> read(Class<T> clazz, MultipartFile file) throws IllegalStateException {
+    public static <T> List<T> read(Class<T> clazz, MultipartFile file) {
         try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
             CsvToBean<T> csvToBean = new CsvToBeanBuilder<T>(reader)
                     .withType(clazz)
