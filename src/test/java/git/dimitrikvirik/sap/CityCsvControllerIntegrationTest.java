@@ -3,7 +3,6 @@ package git.dimitrikvirik.sap;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import git.dimitrikvirik.sap.model.dto.CityCsvDTO;
 import git.dimitrikvirik.sap.model.dto.ErrorDTO;
-import git.dimitrikvirik.sap.model.param.CityCsvParam;
 import git.dimitrikvirik.sap.repository.CityRepository;
 import git.dimitrikvirik.sap.service.CityService;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
