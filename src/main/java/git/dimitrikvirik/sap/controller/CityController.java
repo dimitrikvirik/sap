@@ -10,10 +10,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.List;
 @RequestMapping("/city")
 @RequiredArgsConstructor
 @Tag(name = "City Management", description = "APIs for managing city data")
+@Validated
 public class CityController {
 
     private final CityService cityService;
@@ -77,7 +81,7 @@ public class CityController {
     @PostMapping
     public ResponseEntity<Void> importCities(
             @Parameter(description = "List of cities to import", required = true)
-            @RequestBody List<CityParam> cities
+            @RequestBody @Valid @NotEmpty List<CityParam> cities
     ) {
         cityService.importCities(cities);
         return ResponseEntity.status(HttpStatus.CREATED).build();

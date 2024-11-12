@@ -1,6 +1,7 @@
 package git.dimitrikvirik.sap.service;
 
 import git.dimitrikvirik.sap.model.entity.City;
+import git.dimitrikvirik.sap.model.param.CityCsvParam;
 import git.dimitrikvirik.sap.model.param.CityParam;
 import git.dimitrikvirik.sap.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,14 @@ public class CityService {
     }
 
     public void importCities(List<CityParam> cities) {
+        List<City> cityEntities = cities
+                .stream()
+                .map(City::fromParam)
+                .toList();
+        cityRepository.saveAll(cityEntities);
+    }
+
+    public void importCsvCities(List<CityCsvParam> cities) {
         List<City> cityEntities = cities
                 .stream()
                 .map(City::fromParam)
